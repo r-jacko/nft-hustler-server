@@ -21,10 +21,11 @@ export const getPost = async (req, res) => {
 };
 
 export const createPost = async (req, res) => {
+  console.log(req.body);
   const post = req.body;
   const newPost = new PostMessage({
     ...post,
-    creator: req.userId,
+    // creator: req.userId,
     createdAt: new Date().toISOString(),
   });
   try {

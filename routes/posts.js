@@ -7,6 +7,6 @@ router.get("/", getPosts);
 router.get("/:id", getPost);
 router.post("/submit", createPost);
 router.patch("/submit/:id", updatePost);
-router.delete("/:id", detelePost);
+router.delete("/:id", deletePost);
 
 export default router;
