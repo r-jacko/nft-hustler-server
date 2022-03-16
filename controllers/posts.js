@@ -15,6 +15,18 @@ export const getPosts = async (req, res) => {
   }
 };
 
+export const getPostsBySearch = async (req,res)=>{
+  const {searchQuery} = req.query;
+  console.log(searchQuery);
+  try {
+    const projectName = new RegExp(searchQuery, "i");
+    const posts = await PostMessage.find({projectName:projectName});
+    res.json({data:posts});
+  } catch (error) {
+    res.status(404).json({message: error.message})
+  }
+}
+
 export const getPost = async (req, res) => {
   const { id } = req.params;
   try {
