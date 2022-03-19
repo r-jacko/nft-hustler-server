@@ -16,12 +16,13 @@ export const getPosts = async (req, res) => {
 };
 
 export const getPostsBySearch = async (req,res)=>{
-  const {searchQuery, category} = req.query;
-  console.log(searchQuery);
+  const {searchQuery, category, mint} = req.query;
+  console.log(searchQuery, category, mint);
   try {
+    const searchDate = mint==="soon"? new Date(new Date().getTime() + 2*24*60*60*1000) : null;
     const projectName = new RegExp(searchQuery, "i");
     const categoryExp = new RegExp(category,"i");
-    const posts = await PostMessage.find({$or:[{projectName},{category: categoryExp}]});
+    const posts = await PostMessage.find({$or:[{projectName},{category: categoryExp},{mintDate:{$lt:searchDate,$gt: new Date()}}]});
     res.json({data:posts});
   } catch (error) {
     res.status(404).json({message: error.message})
