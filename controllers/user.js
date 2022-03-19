@@ -29,6 +29,5 @@ export const signup = async (req,res)=>{
     res.status(201).json({result: result, token});
   } catch (error) {
     res.status(500).json({message:"Somenthing went wrong."});
-    console.log(error);
   }
 }
